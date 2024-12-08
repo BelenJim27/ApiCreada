@@ -1,0 +1,66 @@
+<!--Inicio de sesion-->
+<div class="container">
+  <mat-card class="example-card" appearance="outlined">
+    
+    <mat-card-header class="header">
+      <div class="header-content">
+        <img mat-card-image src="assets/img/nabi.png" width="110px" height="95px" alt="Photo of a Shiba Inu" class="header-img">
+        <div>
+          <mat-card-title class="login-title">Bienvenido</mat-card-title>
+          <mat-card-subtitle>Nabi Crochet</mat-card-subtitle>
+        </div>
+      </div>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <mat-tab-group >
+        <mat-tab label="Iniciar Sesión" >
+          <mat-form-field class="field">
+            <mat-label>Correo electrónico</mat-label>
+            <input  [(ngModel)]="username" type="email" matInput placeholder="Ingresa tu correo" value="">
+            <mat-icon matSuffix>email</mat-icon>
+
+          </mat-form-field>
+
+          <mat-form-field class="field">
+            <mat-label>Contraseña</mat-label>
+            <input  [(ngModel)]="password" type="password" matInput placeholder="Ingresa tu contraseña">
+            <mat-icon matSuffix>vpn_key</mat-icon>
+
+          </mat-form-field>
+          <div class="button-container">
+            <button class="mat-button button"  (click)="iniciarSesion()">Iniciar sesión</button>
+          </div>
+
+<!--REGISTRO-->
+
+        </mat-tab>
+        <mat-tab label="Registro">
+          <mat-form-field class="field">
+            <mat-label>Correo electrónico</mat-label>
+            <input type="email" matInput placeholder="Ingresa tu correo" value="">
+            <mat-icon matSuffix>email</mat-icon>
+
+          </mat-form-field>
+
+          <mat-form-field class="field">
+            <mat-label>Contraseña</mat-label>
+            <input type="password" matInput placeholder="Ingresa tu contraseña">
+            <mat-icon matSuffix>vpn_key</mat-icon>
+          </mat-form-field>
+          <mat-form-field class="field">
+            <mat-label>Confirma contraseña</mat-label>
+            <input type="password" matInput placeholder="Confirmar contraseña">
+            <mat-icon matSuffix>mode_edit</mat-icon>
+
+          </mat-form-field>
+          <div class="button-container">
+            <button class="mat-button button" color="primary" (click)="registrar()">Registrarse</button>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+
+    </mat-card-content>
+
+  </mat-card>
+</div>

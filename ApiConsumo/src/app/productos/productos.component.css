@@ -1,0 +1,66 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f4f4f4;
+  }
+  
+  /* Estilos comunes para todos los botones */
+button {
+    padding: 5px 10px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Botón Crear - color verde */
+  .btn-crear {
+    background-color: #4CAF50; /* Verde */
+  }
+  
+  .btn-crear:hover {
+    background-color: #45a049; /* Verde oscuro al pasar el cursor */
+  }
+  
+  .btn-crear:active {
+    background-color: #397639; /* Verde más oscuro al hacer clic */
+  }
+  
+  /* Botón Editar - color morado */
+  .btn-editar {
+    background-color: #9b59b6; /* Morado */
+  }
+  
+  .btn-editar:hover {
+    background-color: #8e44ad; /* Morado más oscuro al pasar el cursor */
+  }
+  
+  .btn-editar:active {
+    background-color: #7d3c98; /* Morado aún más oscuro al hacer clic */
+  }
+  
+  /* Botón Eliminar - color rojo */
+  .btn-eliminar {
+    background-color: #f44336; /* Rojo */
+  }
+  
+  .btn-eliminar:hover {
+    background-color: #e53935; /* Rojo oscuro al pasar el cursor */
+  }
+  
+  .btn-eliminar:active {
+    background-color: #d32f2f; /* Rojo más oscuro al hacer clic */
+  }
+  

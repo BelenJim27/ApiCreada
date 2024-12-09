@@ -3,7 +3,7 @@
 mat-toolbar{
     position: relative;
     z-index: 5;
-    background-color: #816dda;
+    background-color: #5bb3f1;
   }
   .content{
     padding: 24px;
@@ -11,8 +11,7 @@ mat-toolbar{
   }
   .border{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background: linear-gradient(to bottom, #fee3a896, #fcb887b9); 
-
+    background: linear-gradient(to bottom, #FFBED3, #FDDEBE); 
   }
   
   mat-sidenav-container{
@@ -26,4 +25,36 @@ mat-toolbar{
   .spacer {
     flex: 1 1 auto;
   }
+  .user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaciado entre la imagen y el texto */
+}
+
+/* Imagen redonda */
+.profile-img {
+  width: 30px; /* Tamaño de la imagen */
+  height: 30px;
   
+  border-radius: 50%; /* Hace la imagen circular */
+  object-fit: cover; /* Asegura que la imagen se ajuste correctamente */
+  border: 2px solid #ccc; /* Borde opcional para la imagen */
+  margin-right: 10px; /* Agrega margen derecho */
+  transition: border 0.3s; /* Transición para el borde */
+  align-content: baseline;
+}
+
+.profile-img:hover {
+  border: 2px solid #5bb3f1; /* Cambia el borde al pasar el mouse */
+
+}
+
+/* Texto de bienvenida */
+.welcome-text {
+  margin: 0; /* Elimina margen extra */
+  font-size: 16px; /* Ajusta el tamaño del texto */
+  color: #333; /* Color del texto */
+  font-weight: bold; /* Negrita el texto */
+
+  margin-right: 10px; /* Agrega margen inferior */
+}

@@ -13,7 +13,13 @@ export class ProductService {
   getProductos(): Observable<any> {
     return this.http.get(this.apiUrl);
   }
-
+  uploadImage(image: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('image', image);
+  
+    return this.http.post('http://localhost:8000/api/upload', formData);
+  }
+  
   getProducto(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/${id}`);
   }

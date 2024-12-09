@@ -3,10 +3,16 @@
     <button mat-icon-button (click)="collapsed.set(!collapsed())" class="example-icon" aria-label="Example icon-button with menu icon">
       <mat-icon>menu</mat-icon>
     </button>
-    <span class="text">Nabi</span>
+    <span class="text">Mi API</span>
+    
     <span class="spacer"></span>
+    <h3 class="welcome-text">Bienvenido, {{ loggedInUser.name }}</h3>
     <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>account_circle</mat-icon>
+
+
+        <img class="user-info" *ngIf="loggedInUser?.avatar" [src]="loggedInUser.avatar" alt="Foto de perfil" class="profile-img" />
+        
+    
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="logout()">

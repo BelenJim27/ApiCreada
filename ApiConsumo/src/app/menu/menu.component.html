@@ -1,9 +1,7 @@
 <div class="menu">
 <div class="sidenav-header" *ngIf="loggedInUser" class="sidenav-header" [class.collapsed]="sideNavCollapsed()">
     
-    <img *ngIf="loggedInUser.avatar" [src]="loggedInUser.avatar"
-    
-    alt="Foto de perfil" class="profile-img"/>
+    <img *ngIf="loggedInUser?.avatar" [src]="loggedInUser.avatar" alt="Foto de perfil" class="profile-img" />
     <div class="header-text" [class.hide-header-text]="sideNavCollapsed()">
         <h3>Bienvenido, {{ loggedInUser.name }}</h3>
       

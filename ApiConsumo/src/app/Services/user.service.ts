@@ -53,8 +53,12 @@ export class UserService {
     if (isPlatformBrowser(this.platformId)) {
       if (!this.loggedInUser) {
         this.loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || 'null');
+        if (this.loggedInUser && this.loggedInUser.avatar) {
+          this.loggedInUser.avatar = `http://localhost:8000/${this.loggedInUser.avatar}`;
+        }
       }
     }
     return this.loggedInUser;
   }
+  
 }

@@ -14,7 +14,7 @@
   }
   
   .container {
-    background: linear-gradient(to bottom, #ffcf68, #ffba89); 
+    background: linear-gradient(to bottom, #FFBED3, #FDDEBE); 
     height: 100vh; 
     display: flex; 
     justify-content: center; 
@@ -46,7 +46,7 @@
     border-radius: 5px;
     color: #ffffff; 
     height: 35px;
-    background-color: #816dda; 
+    background-color: #5bb3f1; 
     border: none; 
     font-size: 16px; 
     font-weight: 500; 

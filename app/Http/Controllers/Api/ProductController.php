@@ -13,20 +13,19 @@ class productController extends Controller
     public function index()
 {
     $products = Product::all();
+    
+    // Convertir las rutas de las imágenes a URLs accesibles
     $products->each(function ($product) {
-        $product->image = $product->image ? asset('storage/' . $product->image) : null;
+        $product->image = $product->image ? asset($product->image) : null;
     });
 
     return response()->json([
         'products' => $products,
-        
     ], 200);
 }
 
-
 public function store(Request $request)
 {
-    // Validación de la imagen
     $validator = Validator::make($request->all(), [
         'nombre' => 'required|max:255',
         'descripcion' => 'required|max:255',
@@ -43,14 +42,11 @@ public function store(Request $request)
         ], 400);
     }
 
-    // Verificar si el archivo se está recibiendo correctamente
-    $imageUrl = null;
+    $imagePath = null;
     if ($request->hasFile('image') && $request->file('image')->isValid()) {
-        // Almacenar la imagen en el directorio 'products' dentro de 'storage/app/public'
+        // Guardar la imagen en el directorio 'products' dentro de 'storage/app/public'
         $imagePath = $request->file('image')->store('products', 'public');
-        $imageUrl = asset('storage/' . $imagePath);  // Genera la URL accesible
     }
-    
 
     // Crear el producto
     $product = Product::create([
@@ -58,7 +54,7 @@ public function store(Request $request)
         'descripcion' => $request->descripcion,
         'precio' => $request->precio,
         'cantidad' => $request->cantidad,
-        'image' => $imageUrl,
+        'image' => $imagePath ? 'storage/' . $imagePath : null,
     ]);
 
     return response()->json([
@@ -68,24 +64,38 @@ public function store(Request $request)
 }
 
 
+public function uploadImage(Request $request)
+{
+    if ($request->hasFile('image')) {
+        $path = $request->file('image')->store('public/images');
+        $url = Storage::url($path);
+        return response()->json(['url' => $url]);
+    }
+
+    return response()->json(['error' => 'No se subió ninguna imagen'], 400);
+}
     
 
-    public function show($id){
-        $product=Product::find($id);
-        if($product){
-            $data=[
-                'product'=>$product,
-               'status'=>200
-            ];
-            return response()->json($data,200);
-        }else{
-            $data=[
-               'mensaje'=>'Producto no encontrado',
-               'status'=>404
-            ];
-            return response()->json($data,404);
-        }
+public function show($id)
+{
+    $product = Product::find($id);
+
+    if ($product) {
+        // Convertir la ruta de la imagen a una URL accesible
+        $product->image = $product->image ? asset($product->image) : null;
+
+        return response()->json([
+            'product' => $product,
+            'status' => 200,
+        ], 200);
+    } else {
+        return response()->json([
+            'mensaje' => 'Producto no encontrado',
+            'status' => 404,
+        ], 404);
     }
+}
+
 
     public function update(Request $request, $id)
 {
@@ -120,10 +130,17 @@ public function store(Request $request)
     if ($request->has('cantidad')) $product->cantidad = $request->cantidad;
 
     // Actualizar imagen
-    if ($product->image) {
-        \Storage::disk('public')->delete($product->image);
+    if ($request->hasFile('image') && $request->file('image')->isValid()) {
+        // Eliminar la imagen anterior si existe
+        if ($product->image) {
+            \Storage::disk('public')->delete($product->image);
+        }
+    
+        // Subir la nueva imagen y actualizar la URL
+        $imagePath = $request->file('image')->store('products', 'public');
+        $product->image = 'storage/' . $imagePath; // Guardar la ruta relativa
     }
-    $product->image = $request->file('image')->store('products', 'public');
+    
     
 
     $product->save();

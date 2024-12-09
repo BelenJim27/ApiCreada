@@ -70,10 +70,20 @@ public function store(Request $request)
     }
 
     // No ciframos la contraseña, se guarda tal cual
-    $data = $request->all();
+    $imagePath = null;
+    if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
+        // Guardar la imagen en el directorio 'products' dentro de 'storage/app/public'
+        $imagePath = $request->file('avatar')->store('avatars', 'public');
+    }
 
     // Crear el usuario sin cifrar la contraseña
-    $user = User::create($data);
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => $request->password,  // Cifrar la contraseña
+        'role' => $request->role,
+        'avatar' => $imagePath? 'storage/'. $imagePath : null
+    ]);
 
     // Retornamos el usuario con la contraseña sin encriptar
     return response()->json($user, 201);
@@ -102,12 +112,18 @@ public function update(Request $request, $id)
 
     // Datos a actualizar
     $data = $request->all();
+    if ($request->hasFile('avatar')) {
+        // Eliminar la imagen antigua si existe
+        if ($user->avatar) {
+            \Storage::disk('public')->delete($user->avatar);
+        }
 
-    // Si se proporciona una nueva contraseña, no se cifra
-    if (isset($data['password'])) {
-        // Aquí no ciframos la contraseña, la dejamos tal cual
-        $user->password = $data['password'];
+        // Guardar nueva imagen
+        $path = $request->file('avatar')->store('avatars', 'public');
+        $data['avatar'] = $path;
     }
+
+    
 
     // Actualizamos el usuario
     $user->update($data);

@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Editar Producto</h2>
+<mat-dialog-content>
+  <form>
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput [(ngModel)]="data.nombre" name="nombre" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Descripción</mat-label>
+      <input matInput [(ngModel)]="data.descripcion" name="descripcion" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Precio</mat-label>
+      <input matInput [(ngModel)]="data.precio" name="precio" type="number" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Cantidad</mat-label>
+      <input matInput [(ngModel)]="data.cantidad" name="cantidad" type="number" required />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Guardar</button>
+</mat-dialog-actions>

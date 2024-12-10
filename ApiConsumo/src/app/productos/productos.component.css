@@ -26,15 +26,15 @@ button {
   }
   
   /* Botón Crear - color verde */
-  .btn-crear {
+  .btn-mostrar {
     background-color: #4CAF50; /* Verde */
   }
   
-  .btn-crear:hover {
+  .btn-mostrar:hover {
     background-color: #45a049; /* Verde oscuro al pasar el cursor */
   }
   
-  .btn-crear:active {
+  .btn-mostrar:active {
     background-color: #397639; /* Verde más oscuro al hacer clic */
   }
   

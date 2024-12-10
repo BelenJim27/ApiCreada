@@ -13,7 +13,7 @@ Route::get('/products/{id}', [productController::class,'show']);
 
 Route::post('/products',  [productController::class,'store']);
 
-Route::put('/products/{id}', [productController::class,'update']);
+Route::put('/products/{id}', [productController::class, 'update']);
 
 
 Route::patch('/products/{id}', [productController::class,'updateParcial']);

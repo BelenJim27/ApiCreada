@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class productController extends Controller
 {
@@ -112,7 +113,6 @@ public function show($id)
         'descripcion' => 'nullable|max:255',
         'precio' => 'nullable|numeric',
         'cantidad' => 'nullable|integer',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
     ]);
 
     if ($validator->fails()) {
@@ -129,17 +129,8 @@ public function show($id)
     if ($request->has('precio')) $product->precio = $request->precio;
     if ($request->has('cantidad')) $product->cantidad = $request->cantidad;
 
-    // Actualizar imagen
-    if ($request->hasFile('image') && $request->file('image')->isValid()) {
-        // Eliminar la imagen anterior si existe
-        if ($product->image) {
-            \Storage::disk('public')->delete($product->image);
-        }
     
-        // Subir la nueva imagen y actualizar la URL
-        $imagePath = $request->file('image')->store('products', 'public');
-        $product->image = 'storage/' . $imagePath; // Guardar la ruta relativa
-    }
+    
     
     
 

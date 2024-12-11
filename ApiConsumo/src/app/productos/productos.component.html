@@ -5,6 +5,9 @@
     <input matInput [(ngModel)]="searchTerm" (input)="updatePage()" placeholder="Buscar por nombre o descripción" />
   </mat-form-field>
 </div>
+<div class="actions">
+  <button mat-button color="primary" (click)="abrirCrearModal()">Crear Producto</button>
+</div>
 
 <div *ngIf="productos.length > 0; else noProducts">
   <table>

@@ -1,0 +1,32 @@
+<h2>Crear Producto</h2>
+<form (ngSubmit)="createProduct()" enctype="multipart/form-data">
+  <mat-form-field appearance="outline">
+    <mat-label>Nombre</mat-label>
+    <input matInput [(ngModel)]="newProduct.nombre" name="nombre" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Descripción</mat-label>
+    <input matInput [(ngModel)]="newProduct.descripcion" name="descripcion" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Precio</mat-label>
+    <input matInput type="number" [(ngModel)]="newProduct.precio" name="precio" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Cantidad</mat-label>
+    <input matInput type="number" [(ngModel)]="newProduct.cantidad" name="cantidad" required />
+  </mat-form-field>
+
+  <div>
+    <label for="imageUpload">Subir Imagen</label>
+    <input id="imageUpload" type="file" (change)="onFileSelected($event)" accept="image/png, image/jpeg" />
+  </div>
+
+  <div class="modal-actions">
+    <button mat-button (click)="closeDialog()">Cancelar</button>
+    <button mat-button color="primary" type="submit">Aceptar</button>
+  </div>
+</form>

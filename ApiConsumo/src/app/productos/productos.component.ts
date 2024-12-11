@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ProductDetailModalComponent } from '../product-detail-modal/product-detail-modal.component';
 import { ProductEditModalComponent } from '../product-edit-modal/product-edit-modal.component';
+import { ProductCreateModalComponent } from '../product-create-modal/product-create-modal.component';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -111,7 +112,19 @@ export class ProductosComponent implements OnInit {
       data: producto
     });
   }
-
+  abrirCrearModal(): void {
+    const dialogRef = this.dialog.open(ProductCreateModalComponent, {
+      width: '400px',
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Si el modal regresa "true", recarga la lista de productos
+        this.loadProductos();
+      }
+    });
+  }
+  
   // Eliminar producto
   eliminarProducto(producto: any): void {
     const confirmDelete = window.confirm(

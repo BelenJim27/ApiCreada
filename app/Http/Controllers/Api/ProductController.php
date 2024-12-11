@@ -58,10 +58,8 @@ public function store(Request $request)
         'image' => $imagePath ? 'storage/' . $imagePath : null,
     ]);
 
-    return response()->json([
-        'product' => $product,
-        'status' => 201,
-    ], 201);
+    return response()->json($product, 201);
+
 }
 
 

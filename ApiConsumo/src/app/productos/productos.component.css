@@ -101,3 +101,80 @@ button {
     background-color: #d32f2f; /* Rojo más oscuro al hacer clic */
   }
   
+    /* Contenedor del buscador */
+.search-bar {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Ícono de búsqueda */
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #aaa;
+  pointer-events: none;
+}
+
+/* Input de búsqueda */
+.search-input {
+  width: 100%;
+  padding: 10px 15px 10px 40px; /* Añade espacio para el ícono */
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Placeholder estilizado */
+.search-input::placeholder {
+  font-style: italic;
+  color: #aaa;
+}
+
+/* Efecto hover */
+.search-input:hover {
+  border-color: #aaa;
+}
+
+/* Efecto focus */
+.search-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+/* Contenedor del input y el ícono */
+.input-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+/* Color de fondo morado */
+.btn-purple {
+  background-color: #6f42c1; /* Morado Bootstrap */
+  border-color: #6f42c1; /* Borde morado */
+}
+
+.btn-purple:hover {
+  background-color: #5936a8; /* Morado más oscuro al pasar el mouse */
+  border-color: #5936a8;
+}
+
+
+/* Opcional: Estilo general para los botones de acción */
+td button {
+  margin-right: 8px; /* Espaciado entre botones */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px; /* Ajuste de tamaño */
+  border-radius: 4px; /* Bordes redondeados */
+}
+
+td button i {
+  margin: 0; /* Elimina espaciado dentro del ícono */
+}

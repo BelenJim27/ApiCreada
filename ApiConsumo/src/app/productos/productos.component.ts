@@ -9,7 +9,7 @@ import { ProductDetailModalComponent } from '../product-detail-modal/product-det
 import { ProductEditModalComponent } from '../product-edit-modal/product-edit-modal.component';
 import { ProductCreateModalComponent } from '../product-create-modal/product-create-modal.component';
 import { FormsModule } from '@angular/forms';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 @Component({
   selector: 'app-product',
   standalone: true,
@@ -19,7 +19,8 @@ import { FormsModule } from '@angular/forms';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    
   ],
   templateUrl: './productos.component.html',
   styleUrls: ['./productos.component.css']
@@ -44,6 +45,7 @@ export class ProductosComponent implements OnInit {
         this.productos = response.products; // Asumimos que la respuesta tiene una propiedad 'products'
         this.totalProducts = this.productos.length;
         this.updatePage(); // Actualizar los productos a mostrar después de cargar
+        console.log(this.productos);
       },
       (error) => {
         console.error('Error al obtener productos:', error);

@@ -1,13 +1,17 @@
 <div>
   <!-- Campo de búsqueda -->
-  <mat-form-field>
-    <mat-label>Buscar producto</mat-label>
-    <input matInput [(ngModel)]="searchTerm" (input)="updatePage()" placeholder="Buscar por nombre o descripción" />
-  </mat-form-field>
-</div>
+  <div class="search-bar">
+    <div class="input-container">
+      <span class="search-icon">🔍</span>
+      <input type="text" 
+          class="form-control search-input" [(ngModel)]="searchTerm" (input)="updatePage()" placeholder="Buscar por nombre o descripción" />
+  
+      </div>
+      </div>
 <div class="actions">
   <button mat-button color="primary" (click)="abrirCrearModal()">Crear Producto</button>
 </div>
+
 
 <div *ngIf="productos.length > 0; else noProducts">
   <table>
@@ -31,10 +35,37 @@
         <td>${{ producto.precio }}</td>
         <td>{{ producto.cantidad }}</td>
         <td>
-          <button class="btn-mostrar" (click)="mostrarProducto(producto)">Mostrar</button>
-          <button mat-button (click)="editarProducto(producto)">Editar</button>
-          <button class="btn-eliminar" (click)="eliminarProducto(producto)">Eliminar</button>
-        </td>
+  <!-- Botón Mostrar -->
+  <button
+    class="btn btn-primary btn-sm text-white"
+    (click)="mostrarProducto(producto)"
+    aria-label="Mostrar producto"
+    title="Mostrar"
+  >
+    <i class="bi bi-eye"></i>
+  </button>
+
+  <!-- Botón Editar -->
+  <button
+    class="btn btn-purple btn-sm text-white"
+    (click)="editarProducto(producto)"
+    aria-label="Editar producto"
+    title="Editar"
+  >
+    <i class="bi bi-pencil"></i>
+  </button>
+
+  <!-- Botón Eliminar -->
+  <button
+    class="btn btn-danger btn-sm text-white"
+    (click)="eliminarProducto(producto)"
+    aria-label="Eliminar producto"
+    title="Eliminar"
+  >
+    <i class="bi bi-trash"></i>
+  </button>
+</td>
+
       </tr>
     </tbody>
   </table>

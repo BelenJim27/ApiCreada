@@ -3,7 +3,7 @@
 mat-toolbar{
     position: relative;
     z-index: 5;
-    background-color: #5bb3f1;
+    background-color: #055b5c;
   }
   .content{
     padding: 24px;
@@ -11,7 +11,8 @@ mat-toolbar{
   }
   .border{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background: linear-gradient(to bottom, #FFBED3, #FDDEBE); 
+    background: linear-gradient(to bottom, #6ec6ca, #8474a1); 
+    
   }
   
   mat-sidenav-container{
@@ -19,9 +20,10 @@ mat-toolbar{
   }
 
   .text{
-    color: white;
+    color: rgb(255, 255, 255);
     font-weight: bold;
   }
+  
   .spacer {
     flex: 1 1 auto;
   }
@@ -53,7 +55,7 @@ mat-toolbar{
 .welcome-text {
   margin: 0; /* Elimina margen extra */
   font-size: 16px; /* Ajusta el tamaño del texto */
-  color: #333; /* Color del texto */
+  color: white; /* Color del texto */
   font-weight: bold; /* Negrita el texto */
 
   margin-right: 10px; /* Agrega margen inferior */

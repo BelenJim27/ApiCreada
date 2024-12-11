@@ -37,7 +37,7 @@
   
   /* Estilo para los botones en el footer del modal */
   button {
-    background-color: #b8c0ec;
+    background-color: #70cfff;
     color: rgb(173, 169, 169);
     border: none;
     padding: 10px 20px;
@@ -47,7 +47,7 @@
   }
   
   button:hover {
-    background-color: #7387f6;
+    background-color: #53aefd;
   }
   
   button:disabled {
@@ -67,5 +67,17 @@
   /* Estilo para los inputs dentro del modal */
   mat-input-element {
     padding: 12px;
+  }
+
+  .btn-danger{
+    background-color: #f44336;
+    color: white;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-size: 14px;
+    border: none;
+  }
+  .btn-danger:hover{
+    background-color: #e53935;
   }
   

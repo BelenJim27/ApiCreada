@@ -49,20 +49,13 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    background-color: #f44336;
     transition: background-color 0.3s ease;
   }
   
-  button[mat-button] {
-    background-color: #f0f0f0;
-    color: #333333;
-  }
-  
-  button[mat-button]:hover {
-    background-color: #dcdcdc;
-  }
   
   button[mat-button][color="primary"] {
-    background-color: #3f51b5;
+    background-color: #71c3e6;
     color: #ffffff;
   }
   
@@ -85,5 +78,13 @@
       font-size: 0.9rem;
       padding: 0.4rem 0.8rem;
     }
+  }
+  .btn-danger{
+    background-color: #f44336;
+    color: white;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-size: 14px;
+    border: none;
   }
   

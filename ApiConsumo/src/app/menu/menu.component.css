@@ -30,23 +30,29 @@
 }
 
 .mat-nav-list {
-    color: black;
+    color: white;
 }
 
 .header-text > h2 {
     margin: 0;
     font-size: 1rem;
     line-height: 1.5rem;
-    color: black;
+    color: white;
     
 }
 
 .header-text > p {
     margin: 0;
     font-size: 0.8rem;
-    color: black;
+    color: white;
     
 }
 .sidenav-header.collapsed {
     padding: 12px;
 }
+
+.text{
+    
+    font-weight: bold;
+}
+

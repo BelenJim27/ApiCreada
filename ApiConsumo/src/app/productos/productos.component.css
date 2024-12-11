@@ -3,7 +3,27 @@ table {
     border-collapse: collapse;
     margin-bottom: 20px;
   }
+  .table-container {
+    margin-top: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: #fff;
+    padding: 20px;
+  }
   
+  .container {
+    max-width: 95%;
+    margin: 0 auto;
+    
+  }
+  h2{
+    font-size: 35px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
   th, td {
     padding: 10px;
     text-align: left;
@@ -33,7 +53,7 @@ button {
   }
   
   .pagination-controls button {
-    background-color: #4caf50; /* Fondo verde */
+    background-color: #8474a1; /* Fondo verde */
     color: white; /* Texto blanco */
     border: none;
     padding: 8px 16px;
@@ -44,7 +64,7 @@ button {
   }
   
   .pagination-controls button:hover {
-    background-color: #45a049; /* Fondo más oscuro al pasar el ratón */
+    background-color: #8474a1; /* Fondo más oscuro al pasar el ratón */
   }
   
   .pagination-controls button:disabled {
@@ -59,7 +79,6 @@ button {
   
   .pagination-controls button:focus {
     outline: none; /* Elimina el contorno por defecto al hacer clic */
-    box-shadow: 0 0 5px 2px rgba(76, 175, 80, 0.5); /* Sombra suave al hacer clic */
   }
   
   /* Botón Crear - color verde */
@@ -86,6 +105,13 @@ button {
   
   .btn-editar:active {
     background-color: #7d3c98; /* Morado aún más oscuro al hacer clic */
+  }
+
+  .btn-crear{
+    background-color: #62bb62;
+    color: white;
+    border-radius: 5px;
+    margin-bottom: 10px;
   }
   
   /* Botón Eliminar - color rojo */

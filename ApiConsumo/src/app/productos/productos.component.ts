@@ -10,6 +10,7 @@ import { ProductEditModalComponent } from '../product-edit-modal/product-edit-mo
 import { ProductCreateModalComponent } from '../product-create-modal/product-create-modal.component';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+
 @Component({
   selector: 'app-product',
   standalone: true,
@@ -20,7 +21,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    
   ],
   templateUrl: './productos.component.html',
   styleUrls: ['./productos.component.css']
@@ -53,11 +53,30 @@ export class ProductosComponent implements OnInit {
     );
   }
 
+  // Reindexar IDs
+  actualizarIDs(): void {
+    this.productos.forEach((producto, index) => {
+      producto.id = index + 1;
+    });
+  }
+
   // Actualiza los productos a mostrar según la página actual
   updatePage(): void {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     this.paginatedProducts = this.filterProducts().slice(startIndex, endIndex);
+  }
+
+  getPages(): number[] {
+    const totalPages = Math.ceil(this.totalProducts / this.pageSize);
+    const range = 3; // Número máximo de botones visibles a la vez
+    const start = Math.max(this.currentPage - Math.floor(range / 2), 1);
+    const end = Math.min(start + range - 1, totalPages);
+
+    // Ajustar el inicio si el final no cubre el rango completo
+    const adjustedStart = Math.max(end - range + 1, 1);
+
+    return Array.from({ length: end - adjustedStart + 1 }, (_, i) => adjustedStart + i);
   }
 
   // Filtra los productos según el término de búsqueda
@@ -114,6 +133,7 @@ export class ProductosComponent implements OnInit {
       data: producto
     });
   }
+
   abrirCrearModal(): void {
     const dialogRef = this.dialog.open(ProductCreateModalComponent, {
       width: '400px',
@@ -121,12 +141,11 @@ export class ProductosComponent implements OnInit {
   
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // Si el modal regresa "true", recarga la lista de productos
         this.loadProductos();
       }
     });
   }
-  
+
   // Eliminar producto
   eliminarProducto(producto: any): void {
     const confirmDelete = window.confirm(
@@ -137,7 +156,8 @@ export class ProductosComponent implements OnInit {
       this.productService.deleteProducto(producto.id).subscribe(
         () => {
           this.productos = this.productos.filter(p => p.id !== producto.id);
-          this.updatePage(); // Actualizamos la página después de eliminar
+          this.actualizarIDs(); // Actualizar los IDs después de eliminar
+          this.updatePage(); // Actualizar la página después de eliminar
         },
         (error) => {
           console.error('Error al eliminar el producto:', error);

@@ -1,84 +1,114 @@
-<div>
-  <!-- Campo de búsqueda -->
-  <div class="search-bar">
-    <div class="input-container">
-      <span class="search-icon">🔍</span>
-      <input type="text" 
-          class="form-control search-input" [(ngModel)]="searchTerm" (input)="updatePage()" placeholder="Buscar por nombre o descripción" />
-  
+<div class="container mt-5">
+  <div class="table-container">
+    <h2>Lista de usuarios</h2>
+    <!-- Campo de búsqueda -->
+    <div class="search-bar">
+      <div class="input-container">
+        <span class="search-icon">🔍</span>
+        <input
+          type="text"
+          class="form-control search-input"
+          [(ngModel)]="searchTerm"
+          (input)="updatePage()"
+          placeholder="Buscar por nombre o descripción"
+        />
       </div>
+    </div>
+
+    <div class="actions">
+      <button mat-button class="btn-crear" (click)="abrirCrearModal()">Crear Producto</button>
+    </div>
+
+    <div *ngIf="productos.length > 0; else noProducts">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of paginatedProducts">
+            <td>{{ producto.id }}</td>
+            <td>
+              <img
+                *ngIf="producto.image"
+                [src]="producto.image"
+                alt="{{ producto.nombre }}"
+                width="50"
+                height="50"
+              />
+            </td>
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.descripcion }}</td>
+            <td>${{ producto.precio }}</td>
+            <td>{{ producto.cantidad }}</td>
+            <td>
+              <!-- Botón Mostrar -->
+              <button
+                class="btn btn-primary btn-sm text-white"
+                (click)="mostrarProducto(producto)"
+                aria-label="Mostrar producto"
+                title="Mostrar"
+              >
+                <i class="bi bi-eye"></i>
+              </button>
+
+              <!-- Botón Editar -->
+              <button
+                class="btn btn-purple btn-sm text-white"
+                (click)="editarProducto(producto)"
+                aria-label="Editar producto"
+                title="Editar"
+              >
+                <i class="bi bi-pencil"></i>
+              </button>
+
+              <!-- Botón Eliminar -->
+              <button
+                class="btn btn-danger btn-sm text-white"
+                (click)="eliminarProducto(producto)"
+                aria-label="Eliminar producto"
+                title="Eliminar"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Paginación -->
+      <div class="pagination-controls">
+        <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+
+        <!-- Botones de páginas -->
+        <!-- Botones de páginas -->
+<ng-container *ngFor="let page of getPages()">
+  <button
+    (click)="changePage(page)"
+    [class.active]="page === currentPage"
+  >
+    {{ page }}
+  </button>
+</ng-container>
+
+
+        <button
+          (click)="changePage(currentPage + 1)"
+          [disabled]="currentPage * pageSize >= totalProducts"
+        >
+          Siguiente
+        </button>
       </div>
-<div class="actions">
-  <button mat-button color="primary" (click)="abrirCrearModal()">Crear Producto</button>
-</div>
-
-
-<div *ngIf="productos.length > 0; else noProducts">
-  <table>
-    <thead>
-      <tr>
-        <th>Imagen</th>
-        <th>Nombre</th>
-        <th>Descripción</th>
-        <th>Precio</th>
-        <th>Cantidad</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let producto of paginatedProducts">
-        <td>
-          <img *ngIf="producto.image" [src]="producto.image" alt="{{ producto.nombre }}" width="50" height="50">
-        </td>
-        <td>{{ producto.nombre }}</td>
-        <td>{{ producto.descripcion }}</td>
-        <td>${{ producto.precio }}</td>
-        <td>{{ producto.cantidad }}</td>
-        <td>
-  <!-- Botón Mostrar -->
-  <button
-    class="btn btn-primary btn-sm text-white"
-    (click)="mostrarProducto(producto)"
-    aria-label="Mostrar producto"
-    title="Mostrar"
-  >
-    <i class="bi bi-eye"></i>
-  </button>
-
-  <!-- Botón Editar -->
-  <button
-    class="btn btn-purple btn-sm text-white"
-    (click)="editarProducto(producto)"
-    aria-label="Editar producto"
-    title="Editar"
-  >
-    <i class="bi bi-pencil"></i>
-  </button>
-
-  <!-- Botón Eliminar -->
-  <button
-    class="btn btn-danger btn-sm text-white"
-    (click)="eliminarProducto(producto)"
-    aria-label="Eliminar producto"
-    title="Eliminar"
-  >
-    <i class="bi bi-trash"></i>
-  </button>
-</td>
-
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- Paginación -->
-  <div class="pagination-controls">
-    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
-    <span>Página {{ currentPage }} </span>
-    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage * pageSize >= totalProducts">Siguiente</button>
+    </div>
   </div>
-  
+  <ng-template #noProducts>
+    <p>No se encontraron productos.</p>
+  </ng-template>
 </div>
-
-<ng-template #noProducts>
-  <p>No se encontraron productos.</p>
-</ng-template>

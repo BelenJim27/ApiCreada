@@ -42,15 +42,24 @@ export class ProductosComponent implements OnInit {
   loadProductos(): void {
     this.productService.getProductos().subscribe(
       (response: any) => {
-        this.productos = response.products; // Asumimos que la respuesta tiene una propiedad 'products'
+        this.productos = response.products.map((producto: any, index: number) => ({
+          ...producto,
+          localIndex: index + 1, // Asignar índice local basado en la posición inicial
+        }));
         this.totalProducts = this.productos.length;
         this.updatePage(); // Actualizar los productos a mostrar después de cargar
-        console.log(this.productos);
       },
       (error) => {
         console.error('Error al obtener productos:', error);
       }
     );
+  }
+
+  // Actualiza los índices locales después de eliminar un producto
+  actualizarIndices(): void {
+    this.productos.forEach((producto, index) => {
+      producto.localIndex = index + 1;
+    });
   }
 
   // Reindexar IDs
@@ -61,11 +70,7 @@ export class ProductosComponent implements OnInit {
   }
 
   // Actualiza los productos a mostrar según la página actual
-  updatePage(): void {
-    const startIndex = (this.currentPage - 1) * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    this.paginatedProducts = this.filterProducts().slice(startIndex, endIndex);
-  }
+  
 
   getPages(): number[] {
     const totalPages = Math.ceil(this.totalProducts / this.pageSize);
@@ -77,6 +82,14 @@ export class ProductosComponent implements OnInit {
     const adjustedStart = Math.max(end - range + 1, 1);
 
     return Array.from({ length: end - adjustedStart + 1 }, (_, i) => adjustedStart + i);
+  }
+
+  // Filtra los productos según el término de búsqueda
+   // Actualiza los productos a mostrar según la página actual
+   updatePage(): void {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.paginatedProducts = this.filterProducts().slice(startIndex, endIndex);
   }
 
   // Filtra los productos según el término de búsqueda
@@ -95,6 +108,27 @@ export class ProductosComponent implements OnInit {
     this.currentPage = page;
     this.updatePage();
   }
+
+  // Eliminar producto
+  eliminarProducto(producto: any): void {
+    const confirmDelete = window.confirm(
+      `¿Estás seguro de que deseas eliminar el producto "${producto.nombre}"?`
+    );
+
+    if (confirmDelete) {
+      this.productService.deleteProducto(producto.id).subscribe(
+        () => {
+          this.productos = this.productos.filter(p => p.id !== producto.id);
+          this.actualizarIndices(); // Actualizar los índices locales después de eliminar
+          this.updatePage(); // Actualizar la página después de eliminar
+        },
+        (error) => {
+          console.error('Error al eliminar el producto:', error);
+        }
+      );
+    }
+  }
+
 
   // Crear producto
   crearProducto(producto: any) {
@@ -145,24 +179,6 @@ export class ProductosComponent implements OnInit {
       }
     });
   }
-
   // Eliminar producto
-  eliminarProducto(producto: any): void {
-    const confirmDelete = window.confirm(
-      `¿Estás seguro de que deseas eliminar el producto "${producto.nombre}"?`
-    );
-
-    if (confirmDelete) {
-      this.productService.deleteProducto(producto.id).subscribe(
-        () => {
-          this.productos = this.productos.filter(p => p.id !== producto.id);
-          this.actualizarIDs(); // Actualizar los IDs después de eliminar
-          this.updatePage(); // Actualizar la página después de eliminar
-        },
-        (error) => {
-          console.error('Error al eliminar el producto:', error);
-        }
-      );
-    }
-  }
+  
 }

@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <div class="table-container">
-    <h2>Lista de usuarios</h2>
+    <h2>Lista de Productos</h2>
     <!-- Campo de búsqueda -->
     <div class="search-bar">
       <div class="input-container">
@@ -34,7 +34,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let producto of paginatedProducts">
-            <td>{{ producto.id }}</td>
+            <td>{{ producto.localIndex }}</td>
             <td>
               <img
                 *ngIf="producto.image"

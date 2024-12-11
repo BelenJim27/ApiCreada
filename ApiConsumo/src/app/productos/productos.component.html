@@ -1,36 +1,50 @@
+<div>
+  <!-- Campo de búsqueda -->
+  <mat-form-field>
+    <mat-label>Buscar producto</mat-label>
+    <input matInput [(ngModel)]="searchTerm" (input)="updatePage()" placeholder="Buscar por nombre o descripción" />
+  </mat-form-field>
+</div>
+
 <div *ngIf="productos.length > 0; else noProducts">
-    <table>
-      <thead>
-        <tr>
-          <th>Imagen</th>
-          <th>Nombre</th>
-          <th>Descripción</th>
-          <th>Precio</th>
-          <th>Cantidad</th>
-          <th>Acciones</th> <!-- Columna para los botones -->
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let producto of productos">
-          <td>
-            <img *ngIf="producto.image" [src]="producto.image" alt="{{ producto.nombre }}" width="50" height="50">
-          </td>
-          <td>{{ producto.nombre }}</td>
-          <td>{{ producto.descripcion }}</td>
-          <td>${{ producto.precio }}</td>
-          <td>{{ producto.cantidad }}</td>
-          <td>
-            <button class="btn-mostrar" (click)="mostrarProducto(producto)" >Mostrar</button>
-<!-- Botón Editar -->
-              <button mat-button (click)="editarProducto(producto)">Editar</button>
-              <button class="btn-eliminar" (click)="eliminarProducto(producto)" >Eliminar</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Imagen</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of paginatedProducts">
+        <td>
+          <img *ngIf="producto.image" [src]="producto.image" alt="{{ producto.nombre }}" width="50" height="50">
+        </td>
+        <td>{{ producto.nombre }}</td>
+        <td>{{ producto.descripcion }}</td>
+        <td>${{ producto.precio }}</td>
+        <td>{{ producto.cantidad }}</td>
+        <td>
+          <button class="btn-mostrar" (click)="mostrarProducto(producto)">Mostrar</button>
+          <button mat-button (click)="editarProducto(producto)">Editar</button>
+          <button class="btn-eliminar" (click)="eliminarProducto(producto)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Paginación -->
+  <div class="pagination-controls">
+    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+    <span>Página {{ currentPage }} </span>
+    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage * pageSize >= totalProducts">Siguiente</button>
   </div>
   
-  <ng-template #noProducts>
-    <p>No se encontraron productos.</p>
-  </ng-template>
-  
+</div>
+
+<ng-template #noProducts>
+  <p>No se encontraron productos.</p>
+</ng-template>
